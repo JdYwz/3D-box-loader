@@ -28,4 +28,5 @@ data文件夹内包含了不同箱子种类的数据，记录了箱子种类、�
 
 ## 代码
 3D_box_loader_static.py为静态装箱代码
+
 3D_box_loader_active.py为动态装箱代码，其逻辑与静态相似
