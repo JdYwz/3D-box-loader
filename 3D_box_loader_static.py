@@ -139,9 +139,14 @@ def put_box(box, put_loc, state, total_loc):
     loc = {"loc":put_loc, "type":box.get_message(), "state": state}
     total_loc.append(loc)
     print("Put %s into "%box.name, loc)
-    top_loc = put_loc + np.array((0,0,box.h))
-    right_loc = put_loc + np.array((box.l,0,0))
-    front_loc = put_loc + np.array((0,box.w,0))
+    # 根据state调整l、w、h
+    if not state:
+        l, w, h = box.l, box.w, box.h
+    else:
+        l, w, h = box.w, box.l, box.h
+    top_loc = put_loc + np.array((0,0,h))
+    right_loc = put_loc + np.array((l,0,0))
+    front_loc = put_loc + np.array((0,w,0))
     return top_loc,right_loc,front_loc
 
 truck_size = np.array([587,233,220],dtype=np.int32)
