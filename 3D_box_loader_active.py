@@ -180,9 +180,22 @@ def put_box(box, put_loc, state, total_loc):
     loc = {"loc":put_loc, "type":box.get_message(), "state": state}
     total_loc.append(loc)
     print("Put %s into "%box.name, loc)
-    top_loc = put_loc + np.array((0,0,box.h))
-    right_loc = put_loc + np.array((box.l,0,0))
-    front_loc = put_loc + np.array((0,box.w,0))
+    # 根据state调整l、w、h
+    if state == 0:
+        l, w, h = box.l, box.w, box.h
+    elif state == 1:
+        l, w, h = box.w, box.l, box.h
+    elif state == 2:
+        l, w, h = box.l, box.h, box.w
+    elif state == 3:
+        l, w, h = box.h, box.l, box.w
+    elif state == 4:
+        l, w, h = box.w, box.h, box.l
+    elif state == 5:
+        l, w, h = box.h, box.w, box.l
+    top_loc = put_loc + np.array((0,0,h))
+    right_loc = put_loc + np.array((l,0,0))
+    front_loc = put_loc + np.array((0,w,0))
     return top_loc,right_loc,front_loc
 
 def generate_box_id(box_list):
